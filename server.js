@@ -17,6 +17,7 @@ app.use(vite.middlewares);
 // API route for token generation
 app.get("/token", async (req, res) => {
   try {
+    const voice = req.query.voice || "verse";
     const response = await fetch(
       "https://api.openai.com/v1/realtime/sessions",
       {
@@ -27,7 +28,7 @@ app.get("/token", async (req, res) => {
         },
         body: JSON.stringify({
           model: "gpt-4o-realtime-preview-2024-12-17",
-          voice: "verse",
+          voice: voice,
         }),
       },
     );

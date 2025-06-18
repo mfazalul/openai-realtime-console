@@ -75,7 +75,21 @@ export default function SessionControls({
   instructions,
   setInstructions,
   layoutMode,
+  voice,
+  setVoice,
 }) {
+  const voiceOptions = [
+    "alloy",
+    "ash",
+    "ballad",
+    "coral",
+    "echo",
+    "fable",
+    "nova",
+    "onyx",
+    "sage",
+    "shimmer",
+  ];
   if (layoutMode === "bottomFixed") {
     return (
       <div className="flex flex-col w-full">
@@ -94,7 +108,19 @@ export default function SessionControls({
             style={{ marginBottom: 10 }}
           />
         </div>
-        <div style={{ marginBottom: 0, marginTop: 'auto' }} className="flex justify-center w-full">
+        <div style={{ marginBottom: 0, marginTop: 'auto' }} className="flex justify-center items-center w-full">
+          {!isSessionActive && (
+            <select
+              value={voice}
+              onChange={e => setVoice(e.target.value)}
+              className="border rounded p-2 mr-2"
+              style={{ marginRight: 10 }}
+            >
+              {voiceOptions.map((v) => (
+                <option key={v} value={v}>{v}</option>
+              ))}
+            </select>
+          )}
           {isSessionActive ? (
             <SessionActive
               stopSession={stopSession}

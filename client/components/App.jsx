@@ -10,10 +10,11 @@ export default function App() {
   const peerConnection = useRef(null);
   const audioElement = useRef(null);
   const [instructions, setInstructions] = useState("");
+  const [voice, setVoice] = useState("alloy");
 
   async function startSession() {
     // Get a session token for OpenAI Realtime API
-    const tokenResponse = await fetch("/token");
+    const tokenResponse = await fetch(`/token?voice=${encodeURIComponent(voice)}`);
     const data = await tokenResponse.json();
     const EPHEMERAL_KEY = data.client_secret.value;
 
@@ -182,6 +183,8 @@ export default function App() {
                 isSessionActive={isSessionActive}
                 instructions={instructions}
                 setInstructions={setInstructions}
+                voice={voice}
+                setVoice={setVoice}
                 layoutMode="bottomFixed"
               />
             </div>
