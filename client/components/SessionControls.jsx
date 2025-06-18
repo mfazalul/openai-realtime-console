@@ -100,12 +100,11 @@ export default function SessionControls({
           <textarea
             id="instructions"
             className="w-full border rounded p-2 mt-1"
-            rows={3}
+            style={{ marginBottom: 10, height: '70vh', minHeight: 100 }}
             value={instructions}
             onChange={e => setInstructions(e.target.value)}
             placeholder="Enter system instructions for the model..."
             disabled={isSessionActive}
-            style={{ marginBottom: 10 }}
           />
         </div>
         <div style={{ marginBottom: 0, marginTop: 'auto' }} className="flex justify-center items-center w-full">

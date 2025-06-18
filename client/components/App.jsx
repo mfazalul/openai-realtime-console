@@ -169,7 +169,7 @@ export default function App() {
       </nav>
       <main className="absolute top-16 left-0 right-0 bottom-0 flex">
         <section className="flex flex-col absolute top-0 left-0 right-0 bottom-0">
-          <div className="flex-1 min-h-0 px-4 overflow-y-auto">
+          <div className="px-4 overflow-y-auto" style={{height: '50vh'}}>
             <EventLog events={events} />
           </div>
           <div className="flex flex-col items-stretch px-4" style={{paddingBottom: 10, paddingTop: 10}}>
