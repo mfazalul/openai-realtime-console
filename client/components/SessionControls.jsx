@@ -94,7 +94,7 @@ export default function SessionControls({
             style={{ marginBottom: 10 }}
           />
         </div>
-        <div style={{ marginBottom: 0, marginTop: 'auto' }}>
+        <div style={{ marginBottom: 0, marginTop: 'auto' }} className="flex justify-center w-full">
           {isSessionActive ? (
             <SessionActive
               stopSession={stopSession}
