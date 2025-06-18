@@ -10,6 +10,7 @@ export default function App() {
   const [dataChannel, setDataChannel] = useState(null);
   const peerConnection = useRef(null);
   const audioElement = useRef(null);
+  const [instructions, setInstructions] = useState("");
 
   async function startSession() {
     // Get a session token for OpenAI Realtime API
@@ -58,6 +59,19 @@ export default function App() {
 
     peerConnection.current = pc;
   }
+
+  const updateSession = () => {
+    // updateSession is going to update our session with new instructions for the model to follow
+    // we can send any event we want to the model (except updating the voice)
+    // for more information on the events you can send, check out the API documentation
+    const event = {
+      type: "session.update",
+      session: {
+        instructions: instructions || "You are Samantha from the Movie, 'Her', ...", // fallback to default if empty
+      }
+    };
+    dataChannel.send(JSON.stringify(event));
+  };
 
   // Stop current session, clean up peer connection and data channel
   function stopSession() {
@@ -139,6 +153,8 @@ export default function App() {
       dataChannel.addEventListener("open", () => {
         setIsSessionActive(true);
         setEvents([]);
+
+        updateSession();
       });
     }
   }, [dataChannel]);
@@ -153,10 +169,10 @@ export default function App() {
       </nav>
       <main className="absolute top-16 left-0 right-0 bottom-0">
         <section className="absolute top-0 left-0 right-[380px] bottom-0 flex">
-          <section className="absolute top-0 left-0 right-0 bottom-32 px-4 overflow-y-auto">
+          <section className="absolute top-0 left-0 right-0 bottom-48 px-4 overflow-y-auto">
             <EventLog events={events} />
           </section>
-          <section className="absolute h-32 left-0 right-0 bottom-0 p-4">
+          <section className="absolute h-48 left-0 right-0 bottom-0 p-4">
             <SessionControls
               startSession={startSession}
               stopSession={stopSession}
@@ -164,6 +180,8 @@ export default function App() {
               sendTextMessage={sendTextMessage}
               events={events}
               isSessionActive={isSessionActive}
+              instructions={instructions}
+              setInstructions={setInstructions}
             />
           </section>
         </section>

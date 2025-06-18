@@ -72,19 +72,37 @@ export default function SessionControls({
   sendTextMessage,
   serverEvents,
   isSessionActive,
+  instructions,
+  setInstructions,
 }) {
   return (
-    <div className="flex gap-4 border-t-2 border-gray-200 h-full rounded-md">
-      {isSessionActive ? (
-        <SessionActive
-          stopSession={stopSession}
-          sendClientEvent={sendClientEvent}
-          sendTextMessage={sendTextMessage}
-          serverEvents={serverEvents}
+    <div className="flex flex-col gap-2 border-t-2 border-gray-200 h-full rounded-md p-2">
+      <div className="mb-2">
+        <label htmlFor="instructions" className="block text-sm font-medium text-gray-700">
+          System Prompt (Instructions)
+        </label>
+        <textarea
+          id="instructions"
+          className="w-full border rounded p-2 mt-1"
+          rows={3}
+          value={instructions}
+          onChange={e => setInstructions(e.target.value)}
+          placeholder="Enter system instructions for the model..."
+          disabled={isSessionActive}
         />
-      ) : (
-        <SessionStopped startSession={startSession} />
-      )}
+      </div>
+      <div className="flex-1 flex gap-4">
+        {isSessionActive ? (
+          <SessionActive
+            stopSession={stopSession}
+            sendClientEvent={sendClientEvent}
+            sendTextMessage={sendTextMessage}
+            serverEvents={serverEvents}
+          />
+        ) : (
+          <SessionStopped startSession={startSession} />
+        )}
+      </div>
     </div>
   );
 }
