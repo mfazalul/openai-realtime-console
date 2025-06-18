@@ -74,7 +74,41 @@ export default function SessionControls({
   isSessionActive,
   instructions,
   setInstructions,
+  layoutMode,
 }) {
+  if (layoutMode === "bottomFixed") {
+    return (
+      <div className="flex flex-col w-full">
+        <div className="mb-2">
+          <label htmlFor="instructions" className="block text-sm font-medium text-gray-700">
+            System Prompt (Instructions)
+          </label>
+          <textarea
+            id="instructions"
+            className="w-full border rounded p-2 mt-1"
+            rows={3}
+            value={instructions}
+            onChange={e => setInstructions(e.target.value)}
+            placeholder="Enter system instructions for the model..."
+            disabled={isSessionActive}
+            style={{ marginBottom: 10 }}
+          />
+        </div>
+        <div style={{ marginBottom: 0, marginTop: 'auto' }}>
+          {isSessionActive ? (
+            <SessionActive
+              stopSession={stopSession}
+              sendClientEvent={sendClientEvent}
+              sendTextMessage={sendTextMessage}
+              serverEvents={serverEvents}
+            />
+          ) : (
+            <SessionStopped startSession={startSession} />
+          )}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-2 border-t-2 border-gray-200 h-full rounded-md p-2">
       <div className="mb-2">

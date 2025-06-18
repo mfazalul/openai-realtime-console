@@ -167,23 +167,26 @@ export default function App() {
           <h1>realtime console</h1>
         </div>
       </nav>
-      <main className="absolute top-16 left-0 right-0 bottom-0">
-        <section className="absolute top-0 left-0 right-[380px] bottom-0 flex">
-          <section className="absolute top-0 left-0 right-0 bottom-48 px-4 overflow-y-auto">
+      <main className="absolute top-16 left-0 right-0 bottom-0 flex">
+        <section className="flex flex-col absolute top-0 left-0 right-[380px] bottom-0">
+          <div className="flex-1 min-h-0 px-4 overflow-y-auto">
             <EventLog events={events} />
-          </section>
-          <section className="absolute h-48 left-0 right-0 bottom-0 p-4">
-            <SessionControls
-              startSession={startSession}
-              stopSession={stopSession}
-              sendClientEvent={sendClientEvent}
-              sendTextMessage={sendTextMessage}
-              events={events}
-              isSessionActive={isSessionActive}
-              instructions={instructions}
-              setInstructions={setInstructions}
-            />
-          </section>
+          </div>
+          <div className="flex flex-col items-stretch px-4" style={{paddingBottom: 10, paddingTop: 10}}>
+            <div style={{marginBottom: 10}}>
+              <SessionControls
+                startSession={startSession}
+                stopSession={stopSession}
+                sendClientEvent={sendClientEvent}
+                sendTextMessage={sendTextMessage}
+                events={events}
+                isSessionActive={isSessionActive}
+                instructions={instructions}
+                setInstructions={setInstructions}
+                layoutMode="bottomFixed"
+              />
+            </div>
+          </div>
         </section>
         <section className="absolute top-0 w-[380px] right-0 bottom-0 p-4 pt-0 overflow-y-auto">
           <ToolPanel
