@@ -1,4 +1,11 @@
+
 # OpenAI Realtime Console
+
+This is a fork of OpenAI realtime console to enable users to try out different prompts or voices.
+
+![Example of the modified UI](demo_screenshot.png)
+
+-- Original README -- 
 
 This is an example application showing how to use the [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) with [WebRTC](https://platform.openai.com/docs/guides/realtime-webrtc).
 

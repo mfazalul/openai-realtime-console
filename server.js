@@ -4,6 +4,7 @@ import { createServer as createViteServer } from "vite";
 import "dotenv/config";
 
 const app = express();
+const host = process.env.HOST || "0.0.0.0";
 const port = process.env.PORT || 3000;
 const apiKey = process.env.OPENAI_API_KEY;
 
@@ -60,6 +61,6 @@ app.use("*", async (req, res, next) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Express server running on *:${port}`);
+app.listen(port, host, () => {
+  console.log(`Express server running on http://${host}:${port}`);
 });
