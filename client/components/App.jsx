@@ -11,10 +11,12 @@ export default function App() {
   const audioElement = useRef(null);
   const [instructions, setInstructions] = useState("");
   const [voice, setVoice] = useState("alloy");
+  const [speed, setSpeed] = useState(1.0);
+  const [temperature, setTemperature] = useState(0.8);
 
   async function startSession() {
     // Get a session token for OpenAI Realtime API
-    const tokenResponse = await fetch(`/token?voice=${encodeURIComponent(voice)}`);
+    const tokenResponse = await fetch(`/token?voice=${encodeURIComponent(voice)}&speed=${encodeURIComponent(speed)}&temperature=${encodeURIComponent(temperature)}`);
     const data = await tokenResponse.json();
     const EPHEMERAL_KEY = data.client_secret.value;
 
@@ -185,6 +187,10 @@ export default function App() {
                 setInstructions={setInstructions}
                 voice={voice}
                 setVoice={setVoice}
+                speed={speed}
+                setSpeed={setSpeed}
+                temperature={temperature}
+                setTemperature={setTemperature}
                 layoutMode="bottomFixed"
               />
             </div>

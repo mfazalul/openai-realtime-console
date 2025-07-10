@@ -77,6 +77,10 @@ export default function SessionControls({
   layoutMode,
   voice,
   setVoice,
+  speed,
+  setSpeed,
+  temperature,
+  setTemperature,
 }) {
   const voiceOptions = [
     "alloy",
@@ -90,6 +94,8 @@ export default function SessionControls({
     "sage",
     "shimmer",
   ];
+  const speedOptions = Array.from({length: 26}, (_, i) => (0.25 + i * 0.05).toFixed(2));
+  const temperatureOptions = Array.from({length: 13}, (_, i) => (0.6 + i * 0.05).toFixed(2));
   if (layoutMode === "bottomFixed") {
     return (
       <div className="flex flex-col w-full">
@@ -100,25 +106,47 @@ export default function SessionControls({
           <textarea
             id="instructions"
             className="w-full border rounded p-2 mt-1"
-            style={{ marginBottom: 10, height: '70vh', minHeight: 100 }}
+            style={{ marginBottom: 10, height: '60vh', minHeight: 100 }}
             value={instructions}
             onChange={e => setInstructions(e.target.value)}
             placeholder="Enter system instructions for the model..."
             disabled={isSessionActive}
           />
         </div>
-        <div style={{ marginBottom: 0, marginTop: 'auto' }} className="flex justify-center items-center w-full">
+        <div style={{ marginBottom: 0, marginTop: 'auto' }} className="flex justify-center items-center w-full gap-2">
           {!isSessionActive && (
-            <select
-              value={voice}
-              onChange={e => setVoice(e.target.value)}
-              className="border rounded p-2 mr-2"
-              style={{ marginRight: 10 }}
-            >
-              {voiceOptions.map((v) => (
-                <option key={v} value={v}>{v}</option>
-              ))}
-            </select>
+            <>
+              <select
+                value={voice}
+                onChange={e => setVoice(e.target.value)}
+                className="border rounded p-2"
+                style={{ marginRight: 10 }}
+              >
+                {voiceOptions.map((v) => (
+                  <option key={v} value={v}>{v}</option>
+                ))}
+              </select>
+              <select
+                value={speed}
+                onChange={e => setSpeed(Number(e.target.value))}
+                className="border rounded p-2"
+                style={{ marginRight: 10 }}
+              >
+                {speedOptions.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+              <select
+                value={temperature}
+                onChange={e => setTemperature(Number(e.target.value))}
+                className="border rounded p-2"
+                style={{ marginRight: 10 }}
+              >
+                {temperatureOptions.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
+            </>
           )}
           {isSessionActive ? (
             <SessionActive

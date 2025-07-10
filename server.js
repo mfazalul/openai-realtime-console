@@ -19,6 +19,10 @@ app.use(vite.middlewares);
 app.get("/token", async (req, res) => {
   try {
     const voice = req.query.voice || "verse";
+    let speed = parseFloat(req.query.speed);
+    let temperature = parseFloat(req.query.temperature);
+    if (isNaN(speed) || speed < 0.25 || speed > 1.5) speed = 1.0;
+    if (isNaN(temperature) || temperature < 0.6 || temperature > 1.2) temperature = 0.8;
     const response = await fetch(
       "https://api.openai.com/v1/realtime/sessions",
       {
@@ -30,6 +34,8 @@ app.get("/token", async (req, res) => {
         body: JSON.stringify({
           model: "gpt-4o-realtime-preview-2024-12-17",
           voice: voice,
+          speed,
+          temperature,
         }),
       },
     );
