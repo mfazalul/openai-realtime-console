@@ -131,8 +131,8 @@ export default function SessionControls({
               <div className="flex flex-col items-center" style={{marginRight: 10}}>
                 <label className="text-xs font-medium text-gray-700 mb-1">Speed</label>
                 <select
-                  value={speed}
-                  onChange={e => setSpeed(Number(e.target.value))}
+                  value={speed.toFixed(2)}
+                  onChange={e => setSpeed(parseFloat(e.target.value))}
                   className="border rounded p-2"
                 >
                   {speedOptions.map((s) => (
@@ -143,8 +143,8 @@ export default function SessionControls({
               <div className="flex flex-col items-center" style={{marginRight: 10}}>
                 <label className="text-xs font-medium text-gray-700 mb-1">Temperature</label>
                 <select
-                  value={temperature}
-                  onChange={e => setTemperature(Number(e.target.value))}
+                  value={temperature.toFixed(2)}
+                  onChange={e => setTemperature(parseFloat(e.target.value))}
                   className="border rounded p-2"
                 >
                   {temperatureOptions.map((t) => (
