@@ -113,39 +113,45 @@ export default function SessionControls({
             disabled={isSessionActive}
           />
         </div>
-        <div style={{ marginBottom: 0, marginTop: 'auto' }} className="flex justify-center items-center w-full gap-2">
+        <div style={{ marginBottom: 0, marginTop: 'auto' }} className="flex justify-center items-end w-full gap-2">
           {!isSessionActive && (
             <>
-              <select
-                value={voice}
-                onChange={e => setVoice(e.target.value)}
-                className="border rounded p-2"
-                style={{ marginRight: 10 }}
-              >
-                {voiceOptions.map((v) => (
-                  <option key={v} value={v}>{v}</option>
-                ))}
-              </select>
-              <select
-                value={speed}
-                onChange={e => setSpeed(Number(e.target.value))}
-                className="border rounded p-2"
-                style={{ marginRight: 10 }}
-              >
-                {speedOptions.map((s) => (
-                  <option key={s} value={s}>{s}</option>
-                ))}
-              </select>
-              <select
-                value={temperature}
-                onChange={e => setTemperature(Number(e.target.value))}
-                className="border rounded p-2"
-                style={{ marginRight: 10 }}
-              >
-                {temperatureOptions.map((t) => (
-                  <option key={t} value={t}>{t}</option>
-                ))}
-              </select>
+              <div className="flex flex-col items-center" style={{marginRight: 10}}>
+                <label className="text-xs font-medium text-gray-700 mb-1">Voice</label>
+                <select
+                  value={voice}
+                  onChange={e => setVoice(e.target.value)}
+                  className="border rounded p-2"
+                >
+                  {voiceOptions.map((v) => (
+                    <option key={v} value={v}>{v}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex flex-col items-center" style={{marginRight: 10}}>
+                <label className="text-xs font-medium text-gray-700 mb-1">Speed</label>
+                <select
+                  value={speed}
+                  onChange={e => setSpeed(Number(e.target.value))}
+                  className="border rounded p-2"
+                >
+                  {speedOptions.map((s) => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex flex-col items-center" style={{marginRight: 10}}>
+                <label className="text-xs font-medium text-gray-700 mb-1">Temperature</label>
+                <select
+                  value={temperature}
+                  onChange={e => setTemperature(Number(e.target.value))}
+                  className="border rounded p-2"
+                >
+                  {temperatureOptions.map((t) => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </select>
+              </div>
             </>
           )}
           {isSessionActive ? (
