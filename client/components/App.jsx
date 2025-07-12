@@ -157,6 +157,13 @@ export default function App() {
         setEvents([]);
 
         updateSession();
+        // Send response.create to trigger the model to respond, including instructions
+        sendClientEvent({
+          type: "response.create",
+          response: {
+            instructions: instructions,
+          },
+        });
       });
     }
   }, [dataChannel]);
